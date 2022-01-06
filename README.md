@@ -6,9 +6,11 @@ DB: postgres:
 postgres running on docker
 
 1. % docker exec -it 48007cff6b6e /bin/bash
-2. # sql -h localhost -p 5432 -U abhilashgd test //to connect to database test other way is \c test
-3. https://www.postgresql.org/docs/9.5/datatype.html
-4. //Creating a table named person 
+2. sql -h localhost -p 5432 -U abhilashgd test //to connect to database test other way is \c test
+
+
+4. # REFERENCE: https://www.postgresql.org/docs/9.5/datatype.html
+5. //Creating a table named person 
     1. test=# CREATE TABLE person(
     2. test(# id INT,
     3. test(# first_name VARCHAR(50),
