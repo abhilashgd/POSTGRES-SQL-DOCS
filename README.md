@@ -70,43 +70,12 @@ INSERT 0 1
     4. SELECT * FROM person WHERE gender ='Male' AND country_of_birth='Poland' OR country_of_birth='China' AND last_name ='Oven';
 24. //COMPARISON OPERATORS
     1. test=# SELECT 1=1;
-    2.  ?column?
-    3. ----------
-    4.  t
-    5. (1 row)
-    6. 
     7. test=# SELECT 1=2;
-    8.  ?column?
-    9. ----------
-    10.  f
-    11. (1 row)
     12. test=# SELECT 1<2;
-    13.  ?column?
-    14. ----------
-    15.  t
-    16. (1 row)
-    17. 
     18. test=# SELECT 1<1;
-    19.  ?column?
-    20. ----------
-    21.  f
-    22. (1 row)
     23. test=# SELECT 1<>2;
-    24.  ?column?
-    25. ----------
-    26.  t
-    27. (1 row)
     28. test=# SELECT 'abhilashgd'<>'ABHILASHGD';
-    29.  ?column?
-    30. ----------
-    31.  t
-    32. (1 row)
-    33. 
     34. test=# SELECT 'ABHILASHGD'<>'ABHILASHGD';
-    35.  ?column?
-    36. ----------
-    37.  f
-    38. (1 row)
 25. //LIMIT OFFSET and FETCH
     1. SELECT * FROM person LIMIT 5;
     2. SELECT * FROM person OFFSET 5 LIMIT 5;
@@ -152,5 +121,35 @@ INSERT 0 1
     3. SELECT 10 /2;
     4. SELECT 10^3;
     5. SELECT 10 % 3;
+33. SELECT id, make, model, price, price*.10  FROM car;
+34.  SELECT id, make, model, price, ROUND(price*.10,2)  FROM car;
+35. SELECT id, make, model, price, ROUND(price*.10,2),ROUND(price -(price *.10),2)  FROM car;
+36. //ALiases
+    1.  SELECT id, make, model, price AS original_price, ROUND(price*.10,2) AS ten_percent,ROUND(price -(price *.10),2) AS discount_after_10_percent  FROM car;
+37. /COALESCE
+    1. select COALESCE(1);
+    2. select COALESCE(1) AS number;
+    3. select COALESCE(null, null, 1) AS number;
+    4. SELECT COALESCE (email,'email not provided')  FROM person;
+38. SELECT NULLIF(10,10);
+39. SELECT NULLIF(10,1);
+40. SELECT COALESCE(10/ NULLIF(0,0),0); //handling divide by zero
+41. //TIMESTAMPS and DATE
+    1. SELECT NOW();
+    2. SELECT NOW()::DATE;
+    3. SELECT NOW()::TIME;
+42. SELECT NOW()-INTERVAL'1 YEAR';
+43.  SELECT NOW()-INTERVAL'10 YEARS’;
+44. SELECT NOW()-INTERVAL'10 MONTHS';
+45. SELECT NOW()-INTERVAL'10 DAYS’;
+46. SELECT NOW()+INTERVAL'10 MONTHS’;//etcetera
+47. SELECT (NOW() + INTERVAL '10 MONTHS')::DATE;
+48. SELECT EXTRACT(YEAR FROM now());
+49. SELECT EXTRACT(DOW FROM now());
+50. SELECT EXTRACT(CENTURY FROM now());
+51. //AGE FUNCTION
+    1. SELECT first_name,last_name, gender, country_of_birth,date_of_birth, AGE(NOW(),date_of_birth) AS age FROM person;
+
+
 
 
