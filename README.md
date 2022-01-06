@@ -113,6 +113,16 @@ INSERT 0 1
     5.  SELECT * FROM person WHERE country_of_birth IN ('China', 'Brazil', 'Mexico', 'Portugal', 'Nigeria');
     6. SELECT * FROM person WHERE country_of_birth IN ('China', 'Brazil', 'Mexico', 'Portugal', 'Nigeria') ORDER BY country_of_birth;
 26. //BETWEEN KEYWORD
-    1. 
+    1. SELECT * FROM person
+    2. WHERE date_of_birth
+    3. BETWEEN DATE '2021-01-01' AND '2021-05-01'
+27. //LIKE COMMAND
+    1. SELECT * FROM person WHERE email LIKE '%@symantec.com';
+    2. SELECT * FROM person WHERE email LIKE '%@symantec.%';
+    3. SELECT * FROM person WHERE email LIKE '%@baidu.%';
+    4. SELECT * FROM person WHERE email LIKE '_______@%';
+    5.  SELECT * FROM person WHERE email LIKE '___a__@%';
+    6. SELECT * FROM person WHERE country_of_birth LIKE 'P%'; //to fetch countries starting with P
+    7. SELECT * FROM person WHERE country_of_birth ILIKE ‘p%’; // to fetch countries starting with p ignore case
 
 
