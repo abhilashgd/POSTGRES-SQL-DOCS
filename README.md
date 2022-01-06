@@ -8,9 +8,10 @@ postgres running on docker
 1. % docker exec -it 48007cff6b6e /bin/bash
 2. sql -h localhost -p 5432 -U abhilashgd test //to connect to database test other way is \c test
 
-
+# TO generate 1000 data using - https://www.mockaroo.com/
 4. # REFERENCE: https://www.postgresql.org/docs/9.5/datatype.html
-5. //Creating a table named person 
+5. to open sql files, use visual code or sublime text or pgadmin
+6. //Creating a table named person 
     1. test=# CREATE TABLE person(
     2. test(# id INT,
     3. test(# first_name VARCHAR(50),
@@ -50,7 +51,6 @@ INSERT 0 1
 12. test=# select from person;
 13. test=# select first_name from person;
 14. test=# select first_name, last_name from person;
-15. generate 1000 data using - https://www.mockaroo.com/
 16. \?
 17.  Downloads git:(master) ✗ docker cp person.sql 48007cff6b6e:/usr/src //to copy file from local to docker container path /usr/src
 18. \i /usr/src/person.sql //to run sql file
@@ -126,5 +126,31 @@ INSERT 0 1
     5.  SELECT * FROM person WHERE email LIKE '___a__@%';
     6. SELECT * FROM person WHERE country_of_birth LIKE 'P%'; //to fetch countries starting with P
     7. SELECT * FROM person WHERE country_of_birth ILIKE ‘p%’; // to fetch countries starting with p ignore case
+28. //GROUPING BY KEYWORD
+    1. SELECT country_of_birth, COUNT(*)  FROM person GROUP BY country_of_birth; // to count number of person in each country;
+    2. SELECT country_of_birth, COUNT(*)  FROM person GROUP BY country_of_birth ORDER BY country_of_birth;// displays in order
+29. //HAVING KEYWORD
+    1. SELECT country_of_birth, COUNT(*)  FROM person GROUP BY country_of_birth HAVING COUNT(*) >10 ORDER BY country_of_birth;
+    2. SELECT country_of_birth, COUNT(*)  FROM person GROUP BY country_of_birth HAVING COUNT(*) >37 ORDER BY country_of_birth;
+30. // CREATE a NEW TABLE
+    1. create from mockaroo and copy to docker
+    2. docker cp car.sql 48007cff6b6e:/usr/src
+    3. \i /usr/src/car.sql
+31. //MAX, MIN, AVG and SUM
+    1.  SELECT MAX(price) FROM car;
+    2. SELECT MIN(price) FROM car;
+    3. SELECT AVG(price) FROM car;
+    4. SELECT ROUND(AVG(price)) FROM car;
+    5. SELECT make, model, MIN(price) FROM car GROUP BY make, model;
+    6. SELECT make, model, MAX(price) FROM car GROUP BY make, model;
+    7. SELECT make,  MAX(price) FROM car GROUP BY make;
+    8. SELECT SUM(price) FROM car;
+    9. SELECT make, SUM(price) FROM car GROUP BY make;
+32. //ARITHAMETIC OPERATOR
+    1. SELECT 10+2;
+    2. SELECT 10 * 2+8;
+    3. SELECT 10 /2;
+    4. SELECT 10^3;
+    5. SELECT 10 % 3;
 
 
