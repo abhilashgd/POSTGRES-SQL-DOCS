@@ -149,6 +149,42 @@ INSERT 0 1
 50. SELECT EXTRACT(CENTURY FROM now());
 51. //AGE FUNCTION
     1. SELECT first_name,last_name, gender, country_of_birth,date_of_birth, AGE(NOW(),date_of_birth) AS age FROM person;
+  52. //PRIMARY KEY
+    1. insert into person (id, first_name, last_name, email, gender, date_of_birth, country_of_birth) values (1,'Bryna', 'Bruckman', 'bbruckman0@live.com', 'Female', '2021/08/27', 'Jamaica');
+    2. ERROR:  duplicate key value violates unique constraint "person_pkey"
+    3. DETAIL:  Key (id)=(1) already exists.
+    4. ALTER TABLE person DROP CONSTRAINT person_pkey; //duplicates can be added if we drop constraint
+    5. select * from person WHERE id= 1;
+    6. ALTER TABLE person ADD PRIMARY KEY (id);
+    7. DELETE FROM person WHERE id=1;
+    8. ALTER TABLE person ADD PRIMARY KEY (id);
+53. //ADDING UNIQUE CONSTRAINT
+54. ALTER TABLE person ADD CONSTRAINT unique_email_address UNIQUE (email);
+56. ALTER TABLE person ADD CONSTRAINT gender_constraint CHECK(gender='Female'OR gender='Male');
+57. DELETE FROM person WHERE gender ='Agender';
+
+                                        Table "public.person"
+      Column      |          Type          | Collation | Nullable |
+ Default
+------------------+------------------------+-----------+----------+-------------
+-----------------------
+ id               | bigint                 |           | not null | nextval('per
+son_id_seq'::regclass)
+ first_name       | character varying(50)  |           | not null |
+ last_name        | character varying(50)  |           | not null |
+ email            | character varying(150) |           |          |
+ gender           | character varying(7)   |           | not null |
+ date_of_birth    | date                   |           | not null |
+ country_of_birth | character varying(50)  |           |          |
+Indexes:
+    "person_pkey" PRIMARY KEY, btree (id)
+    "unique_email_address" UNIQUE CONSTRAINT, btree (email)
+Check constraints:
+    "gender_constraint" CHECK (gender::text = 'Female'::text OR gender::text = '
+Male'::text)
+
+
+
 
 
 
