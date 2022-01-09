@@ -251,6 +251,27 @@ results.csv
 108. SELECT * FROM person_id_seq;
 109. //POSTGRES EXTENSIONS
     1.  SELECT * FROM pg_available_extensions;
+109. //UUID
+110. https://en.wikipedia.org/wiki/Universally_unique_identifier
+111. CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    1.  SELECT * FROM pg_available_extensions;
+    2.  \df
+    3. SELECT uuid_generate_v4();
+     4. \i /usr/src/person-car-2.sql
+112. select * from person;
+113. select * from car;
+114. //person-car-2.sql has UUID implementation
+115.  UPADTE person SET car_uid='63208e76-e793-499d-87dd-7250b30405ee' WHERE person_uid = 'b41f06e4-bd1a-47bc-b0f8-81d559759411';
+116. UPDATE person SET car_uid='9539bba6-5f63-4dcb-95ab-f1845b5761b2' WHERE person_uid = 'e83ed9b7-7f91-4d95-a6e1-ac681d6c699e';
+117. select * from person                                                                     JOIN car ON person.car_uid = car.car_uid;
+118. SELECT * FROM person
+119. JOIN car USING (car_uid);
+    1. SELECT * FROM person
+    2. LEFT JOIN car USING (car_uid);
+120.  SELECT * FROM person
+    1. LEFT JOIN car USING (car_uid)
+    2. WHERE car.* IS NULL;
+
 
 
 
