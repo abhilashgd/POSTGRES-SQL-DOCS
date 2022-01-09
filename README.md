@@ -183,6 +183,74 @@ Check constraints:
     "gender_constraint" CHECK (gender::text = 'Female'::text OR gender::text = '
 Male'::text)
 
+57. DELETE * FROM person;
+58. SELECT * FROM person WHERE id=2;
+59. UPDATE person SET email ='parke@teshmail.com' WHERE id =2;
+60. SELECT * FROM person WHERE id=2;
+61. UPDATE person SET first_name ='Laacie', last_name ='Montana', email ='laacieMontana@testmail.com' WHERE id=2;
+62. SELECT * FROM person WHERE id=2;
+63.  INSERT INTO person (
+64. first_name,
+65. last_name,
+66. gender,
+67. date_of_birth, email)
+68. VALUES('Jake', 'Jones', 'MALE', DATE '1990-01-01','jake@gmail.com') 
+69. ON CONFLICT(id) DO NOTHING;
+70.  INSERT INTO person (
+71. first_name,
+72. last_name,
+73. gender,
+74. date_of_birth, email)
+75. VALUES('Jake', 'Jones', 'MALE', DATE '1990-01-01','jake@gmail.com') 
+76. ON CONFLICT(id) DO UPDATE SET email = EXCLUDED.email;
+77. //foreign key is a column that references primary key in another table
+78. docker cp person-car.sql 48007cff6b6e:/usr/src
+79. \i /usr/src/person-car.sql
+80. \d person
+81. SELECT * FROM person;
+82. SELECT * FROM car;
+83. UPDATE person SET car_id=2 WHERE id=1;
+84. UPDATE person SET car_id=1 WHERE id=2;
+85. SELECT * FROM person;
+86. //INNER joins
+87.  SELECT * FROM person
+88. JOIN car ON person.car_id=car.id;
+89. \x //expanded display on
+    1.  SELECT * FROM person
+    2. JOIN car ON person.car_id=car.id;
+    3.  SELECT person.first_name, car.make,car.model,car.price
+    4.  FROM person
+    5. JOIN car ON person.car_id=car.id;
+90. \x // to turn off expanded display
+91. //LEFT JOIN
+    1. SELECT * FROM person
+    2. LEFT JOIN car ON person.car_id=car.id;
+92. SELECT * FROM person WHERE car_id is NULL;
+93. insert into car (id, make, model, price) values (13, 'Mazda', 'RX-8', '51272.48');
+94. SELECT * FROM car;
+95. insert into person (first_name, last_name, email, gender, date_of_birth, country_of_birth) values ('Bryna', 'Bruckman', 'bbruckman0@live.com', 'Female', '2021/08/27', 'Jamaica');
+96. UPDATE person SET car_id=13 WHERE id=4;
+97. SELECT * FROM person WHERE id=4;
+98. SELECT * FROM car where id=13;
+99. SELECT * FROM person
+    1.  LEFT JOIN car ON car.id=person.car_id;
+100. \copy (SELECT * FROM person LEFT JOIN car ON car.id=person.car_id) TO '/usr/src/results.csv' DELIMITER ',' CSV HEADER;
+results.csv
+
+![Screen Shot 2022-01-09 at 1 09 54 PM](https://user-images.githubusercontent.com/21958756/148674160-79fc9d76-fbf1-41b7-a5ec-0c98162ba8f6.png)
+
+
+
+
+102. #docker cp 48007cff6b6e:/usr/src/results.csv .  //to copy from docker container to local
+103. SELECT nextval('person_id_seq'::regclass);
+104.  insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth) values ('John', 'SEcond', 'Male', 'johnSecond@feedburner.com', '1965-02-28', 'England');
+105. select * FROM person;
+106. SELECT * FROM person_id_seq;
+107. ALTER SEQUENCE person_id_seq RESTART WITH 15;
+108. SELECT * FROM person_id_seq;
+109. //POSTGRES EXTENSIONS
+    1.  SELECT * FROM pg_available_extensions;
 
 
 
