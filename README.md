@@ -6,7 +6,7 @@ DB: postgres:
 postgres running on docker
 
 1. % docker exec -it 48007cff6b6e /bin/bash
-2. sql -h localhost -p 5432 -U abhilashgd test //to connect to database test other way is \c test
+2. psql -h localhost -p 5432 -U abhilashgd test //to connect to database test other way is \c test
 
 # TO generate 1000 data using - https://www.mockaroo.com/
 4. # REFERENCE: https://www.postgresql.org/docs/9.5/datatype.html
